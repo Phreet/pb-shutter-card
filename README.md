@@ -1,11 +1,10 @@
-# Shutter card
+# Shutter card (custom edit)
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/custom-components/hacs)
-[![buymeacoffee_badge](https://img.shields.io/badge/Donate-Buymeacoffee-orange?style=for-the-badge)](https://www.buymeacoffee.com/Deejayfool)
 
-This card allows to open, close or set a shutter to the opening rate you want.
+This card controls a shutter device to open, close or set to a numeric opening rate you want.
 
-![Shutter card](https://raw.githubusercontent.com/Deejayfool/hass-shutter-card/master/images/shutter-card.gif)
+![Shutter card](https://github.com/Phreet/hass-shutter-card/blob/master/images/shutter-card.gif)
 
 ## Configuration
 
@@ -13,7 +12,7 @@ This card allows to open, close or set a shutter to the opening rate you want.
 
 | Name | Type | Required | Default | Description
 | ---- | ---- | -------- | ------- | -----------
-| type | string | True | - | Must be "custom:shutter-card"
+| type | string | True | 'custom:shutter-card' | -
 | title | string | False | - | Title of the card
 
 ### Entities
@@ -46,14 +45,13 @@ entities:
     name: Left shutter
     buttons_position: left
     title_position: bottom
-  - cover.bedroom_shutter
 ```
 
 ## Install
 
 If you use HACS, the resources will automatically be configured with the needed file.
 
-If you don't use HACS, you can download js file from [latest releases](https://github.com/Deejayfool/hass-shutter-card/releases). Drop it then in `www` folder in your `config` directory. Next add the following entry in lovelace configuration:
+If you don't use HACS, you can download js file from [latest releases](https://github.com/Phreet/hass-shutter-card/releases). Drop it then in `www` folder in your `config` directory. Next add the following entry in lovelace configuration:
 
 ```yaml
 resources:
