@@ -22,16 +22,21 @@ class ShutterCard extends HTMLElement {
             entityId = entity.entity;
         }
         
-        let buttonsPosition = 'left';
+        let buttonsPosition = 'left'; # should allow: left, right, none
         if (entity && entity.buttons_position) {
             buttonsPosition = entity.buttons_position.toLowerCase();
         }
         
-        let titlePosition = 'top';
+        let titlePosition = 'top';  # should allow: top, bottom, none
         if (entity && entity.title_position) {
             titlePosition = entity.title_position.toLowerCase();
         }
 
+#        let theme = 'white';  # should allow: white, grey, dark
+#        if (entity && entity.theme) {
+#            theme = entity.theme.toLowerCase();
+#        }
+        
         let invertPercentage = false;
         if (entity && entity.invert_percentage) {
           invertPercentage = entity.invert_percentage;
