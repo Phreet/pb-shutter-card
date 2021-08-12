@@ -1,10 +1,10 @@
-# Shutter card (custom edit)
+# Shutter card
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/custom-components/hacs)
 
 This card controls a shutter device to open, close or set to a numeric opening rate you want.
 
-![Shutter card](https://github.com/Phreet/hass-shutter-card/blob/master/images/shutter-card.gif)
+![Shutter card](https://github.com/Phreet/pb-shutter-card/blob/master/images/shutter-card.gif)
 
 ## Configuration
 
@@ -12,7 +12,7 @@ This card controls a shutter device to open, close or set to a numeric opening r
 
 | Name | Type | Required | Default | Description
 | ---- | ---- | -------- | ------- | -----------
-| type | string | True | 'custom:shutter-card' | -
+| type | string | True | 'custom:pb-shutter-card' | -
 | title | string | False | - | Title of the card
 
 ### Entities
@@ -20,9 +20,9 @@ This card controls a shutter device to open, close or set to a numeric opening r
 | Name | Type | Required | Default | Description
 | ---- | ---- | -------- | ------- | -----------
 | entity | string | True | - | The shutter entity ID
-| name | string | False | _Friendly name of the entity_ | Name to display for the shutter
-| buttons_position | string | False | `left` | Set buttons on `left` or on `right` of the shutter
-| title_position | string | False | `top` | Set title on `top` or on `bottom` of the shutter
+| name | string | False | _Friendly name of the entity_ | Name to display
+| buttons_position | string | False | `left` | Set buttons `left`, `right` or `none` to disable
+| title_position | string | False | `top` | Set title on `top`, `bottom` or `none` to disable
 | invert_percentage | boolean | False | `false` | Set it to `true` if your shutter is 100% when it is closed, and 0% when it is opened
 | offset | integer | False | 0 | See [Offset configuration](#offset-configuration)
 
@@ -51,7 +51,7 @@ entities:
 
 If you use HACS, the resources will automatically be configured with the needed file.
 
-If you don't use HACS, you can download js file from [latest releases](https://github.com/Phreet/hass-shutter-card/releases). Drop it then in `www` folder in your `config` directory. Next add the following entry in lovelace configuration:
+If you don't use HACS, you can download js file from [latest releases](https://github.com/Phreet/pb-shutter-card/releases). Drop it then in `www` folder in your `config` directory. Next add the following entry in lovelace configuration:
 
 ```yaml
 resources:

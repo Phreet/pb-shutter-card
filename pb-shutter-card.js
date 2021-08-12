@@ -2,39 +2,39 @@ class ShutterCard extends HTMLElement {
   set hass(hass) {
     const _this = this;
     const entities = this.config.entities;
-    
+
     //Init the card
     if (!this.card) {
-      const card = document.createElement('ha-card');
-      
+      const card = document.createElement("ha-card");
+
       if (this.config.title) {
-          card.header = this.config.title;
+        card.header = this.config.title;
       }
-    
+
       this.card = card;
       this.appendChild(card);
-    
-      let allShutters = document.createElement('div');
-      allShutters.className = 'sc-shutters';
+
+      let allShutters = document.createElement("div");
+      allShutters.className = "sc-shutters";
       entities.forEach(function(entity) {
         let entityId = entity;
         if (entity && entity.entity) {
-            entityId = entity.entity;
+          entityId = entity.entity;
         }
-        
-        let buttonsPosition = 'left'; // should allow: left, right, none
+
+        let buttonsPosition = "left"; // allows: left, right, none
         if (entity && entity.buttons_position) {
-            buttonsPosition = entity.buttons_position.toLowerCase();
+          buttonsPosition = entity.buttons_position.toLowerCase();
         }
         
-        let titlePosition = 'top';  // should allow: top, bottom, none
+        let titlePosition = "top";  // allows: top, bottom, none
         if (entity && entity.title_position) {
-            titlePosition = entity.title_position.toLowerCase();
+          titlePosition = entity.title_position.toLowerCase();
         }
 
 //        let theme = 'white';  # should allow: white, grey, dark
 //        if (entity && entity.theme) {
-//            theme = entity.theme.toLowerCase();
+//          theme = entity.theme.toLowerCase();
 //        }
         
         let invertPercentage = false;
@@ -42,9 +42,9 @@ class ShutterCard extends HTMLElement {
           invertPercentage = entity.invert_percentage;
         }
           
-        let shutter = document.createElement('div');
+        let shutter = document.createElement("div");
 
-        shutter.className = 'sc-shutter';
+        shutter.className = "sc-shutter";
         shutter.dataset.shutter = entityId;
         shutter.innerHTML = `
           <div class="sc-shutter-top" ` + ((titlePosition == 'bottom' || titlePosition == 'none') ? 'style="display:none;"' : '') + `>
@@ -75,20 +75,19 @@ class ShutterCard extends HTMLElement {
         let picker = shutter.querySelector('.sc-shutter-selector-picker');
         
         let mouseDown = function(event) {
-            if (event.cancelable) {
-              //Disable default drag event
-              event.preventDefault();
-            }
-            
-            _this.isUpdating = true;
-            
-            document.addEventListener('mousemove', mouseMove);
-            document.addEventListener('touchmove', mouseMove);
-            document.addEventListener('pointermove', mouseMove);
-      
-            document.addEventListener('mouseup', mouseUp);
-            document.addEventListener('touchend', mouseUp);
-            document.addEventListener('pointerup', mouseUp);
+          if (event.cancelable) {
+            //Disable default drag event
+            event.preventDefault();
+          }
+          
+          _this.isUpdating = true;
+          
+          document.addEventListener("mousemove", mouseMove);
+          document.addEventListener("touchmove", mouseMove);
+          document.addEventListener("pointermove", mouseMove);
+          document.addEventListener("mouseup", mouseUp);
+          document.addEventListener("touchend", mouseUp);
+          document.addEventListener("pointerup", mouseUp);
         };
   
         let mouseMove = function(event) {
@@ -117,45 +116,41 @@ class ShutterCard extends HTMLElement {
           } else {
             _this.updateShutterPosition(hass, entityId, 100 - percentagePosition);
           }
-          
-          document.removeEventListener('mousemove', mouseMove);
-          document.removeEventListener('touchmove', mouseMove);
-          document.removeEventListener('pointermove', mouseMove);
-      
-          document.removeEventListener('mouseup', mouseUp);
-          document.removeEventListener('touchend', mouseUp);
-          document.removeEventListener('pointerup', mouseUp);
+
+          document.removeEventListener("mousemove", mouseMove);
+          document.removeEventListener("touchmove", mouseMove);
+          document.removeEventListener("pointermove", mouseMove);
+          document.removeEventListener("mouseup", mouseUp);
+          document.removeEventListener("touchend", mouseUp);
+          document.removeEventListener("pointerup", mouseUp);
         };
-      
+
         //Manage slider update
-        picker.addEventListener('mousedown', mouseDown);
-        picker.addEventListener('touchstart', mouseDown);
-        picker.addEventListener('pointerdown', mouseDown);
-        
+        picker.addEventListener("mousedown", mouseDown);
+        picker.addEventListener("touchstart", mouseDown);
+        picker.addEventListener("pointerdown", mouseDown);
+
         //Manage click on buttons
         shutter.querySelectorAll('.sc-shutter-button').forEach(function (button) {
             button.onclick = function () {
-                const command = this.dataset.command;
-                
-                let service = '';
-                
-                switch (command) {
-                  case 'up':
-                      service = 'open_cover';
-                      break;
-                      
-                  case 'down':
-                      service = 'close_cover';
-                      break;
-                
-                  case 'stop':
-                      service = 'stop_cover';
-                      break;
-                }
-                
-                hass.callService('cover', service, {
-                  entity_id: entityId
-                });
+              const command = this.dataset.command;
+              let service = '';
+              
+              switch (command) {
+                case "up":
+                    service = "open_cover";
+                    break;
+                case "down":
+                    service = "close_cover";
+                    break;
+                case "stop":
+                    service = "stop_cover";
+                    break;
+              }
+              
+              hass.callService("cover", service, {
+                entity_id: entityId
+              });
             };
         });
       
@@ -163,7 +158,7 @@ class ShutterCard extends HTMLElement {
       });
       
       
-      const style = document.createElement('style');
+      const style = document.createElement("style");
       style.textContent = `
         .sc-shutters { padding: 16px; }
           .sc-shutter { margin-top: 1rem; overflow: hidden; }
@@ -205,8 +200,8 @@ class ShutterCard extends HTMLElement {
       const picker = shutter.querySelector('.sc-shutter-selector-picker');
         
       const state = hass.states[entityId];
-      const friendlyName = (entity && entity.name) ? entity.name : state ? state.attributes.friendly_name : 'unknown';
-      let currentPosition = state ? state.attributes.current_position : 'unknown';
+      const friendlyName = (entity && entity.name) ? entity.name : state ? state.attributes.friendly_name : "unknown";
+      let currentPosition = state ? state.attributes.current_position : "unknown";
 
       if (offset){
         if (currentPosition <= offset)
@@ -221,7 +216,7 @@ class ShutterCard extends HTMLElement {
       
       if (!_this.isUpdating) {
         shutter.querySelectorAll('.sc-shutter-position').forEach(function (shutterPosition) {
-          shutterPosition.innerHTML = currentPosition + '%';
+          shutterPosition.innerHTML = currentPosition + "%";
         })
 
         if (invertPercentage) {
@@ -237,13 +232,9 @@ class ShutterCard extends HTMLElement {
       let pictureBox = picture.getBoundingClientRect();
       let body = document.body;
       let docEl = document.documentElement;
-
       let scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
-
       let clientTop = docEl.clientTop || body.clientTop || 0;
-
       let pictureTop  = pictureBox.top + scrollTop - clientTop;
-      
       return pictureTop;
   }
   
@@ -260,14 +251,14 @@ class ShutterCard extends HTMLElement {
     if (position > this.maxPosition)
       position = this.maxPosition;
   
-    picker.style.top = position + 'px';
-    slide.style.height = position - this.minPosition + 'px';
+    picker.style.top = position + "px";
+    slide.style.height = position - this.minPosition + "px";
   }
   
   updateShutterPosition(hass, entityId, position) {
     let shutterPosition = Math.round(position);
   
-    hass.callService('cover', 'set_cover_position', {
+    hass.callService("cover", "set_cover_position", {
       entity_id: entityId,
       position: shutterPosition
     });
@@ -275,7 +266,7 @@ class ShutterCard extends HTMLElement {
 
   setConfig(config) {
     if (!config.entities) {
-      throw new Error('You need to define entities');
+      throw new Error("You need to define entities");
     }
     
     this.config = config;
@@ -291,4 +282,4 @@ class ShutterCard extends HTMLElement {
   }
 }
 
-customElements.define("shutter-card", ShutterCard);
+customElements.define("pb-shutter-card", ShutterCard);
