@@ -52,7 +52,7 @@ class ShutterCard extends HTMLElement {
             <div class="sc-shutter-position"></div>
           </div>
           <div class="sc-shutter-middle" style="flex-direction: ` + (buttonsPosition == 'right' ? 'row-reverse': 'row') + `;">
-            <div class="sc-shutter-buttons">
+            <div class="sc-shutter-buttons"` + (buttonsPosition == 'none' ? 'style="display:none;"' : '') + `>
               <ha-icon-button icon="mdi:arrow-up" class="sc-shutter-button" data-command="up"></ha-icon-button><br>
               <ha-icon-button icon="mdi:stop" class="sc-shutter-button" data-command="stop"></ha-icon-button><br>
               <ha-icon-button icon="mdi:arrow-down" class="sc-shutter-button" data-command="down"></ha-icon-button>
@@ -70,9 +70,9 @@ class ShutterCard extends HTMLElement {
           </div>
         `;
         
-        let picture = shutter.querySelector('.sc-shutter-selector-picture');
-        let slide = shutter.querySelector('.sc-shutter-selector-slide');
-        let picker = shutter.querySelector('.sc-shutter-selector-picker');
+        let picture = shutter.querySelector(".sc-shutter-selector-picture");
+        let slide = shutter.querySelector(".sc-shutter-selector-slide");
+        let picker = shutter.querySelector(".sc-shutter-selector-picker");
         
         let mouseDown = function(event) {
           if (event.cancelable) {
@@ -210,12 +210,12 @@ class ShutterCard extends HTMLElement {
           currentPosition = Math.round((currentPosition - offset) / ((100 - offset) / 100));
       }
 
-      shutter.querySelectorAll('.sc-shutter-label').forEach(function(shutterLabel) {
+      shutter.querySelectorAll(".sc-shutter-label").forEach(function(shutterLabel) {
           shutterLabel.innerHTML = friendlyName;
       })
       
       if (!_this.isUpdating) {
-        shutter.querySelectorAll('.sc-shutter-position').forEach(function (shutterPosition) {
+        shutter.querySelectorAll(".sc-shutter-position").forEach(function (shutterPosition) {
           shutterPosition.innerHTML = currentPosition + "%";
         })
 
